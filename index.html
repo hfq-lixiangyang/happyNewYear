@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Title</title>
+    <style>
+        ::-webkit-scrollbar{
+            width: 0;
+            height: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        body,section{
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        @font-face {
+            font-family: "BenMo";
+            src: url(./font/font.ttf);
+        }
+        input[type='text']:focus{
+            outline: none;
+        }
+        .flex{
+            display: flex;
+            display: -webkit-flex;
+        }
+        .flex.column{
+            flex-direction: column;
+            -webkit-flex-direction: column;
+        }
+        .flex.alicen{
+            align-items: center;
+            -webkit-align-items: center;
+        }
+        .flex.justcen{
+            justify-content: center;
+            -webkit-justify-content: center;
+        }
+        .flex.justbetween{
+            justify-content: space-between;
+            -webkit-justify-content: space-between;
+        }
+        .flex.justaround{
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
+        }
+        .logo-wrap{
+            position: relative;
+            height: 52px;
+            padding: 10px .5rem;
+        }
+        .logo-wrap > img{
+            position: absolute;
+            width: 142px;
+            height: 52px;
+            display: none;
+        }
+        .logo-wrap > img.active{
+            display: block;
+        }
+        .card-wrap{
+            height: calc(100% - 132px);
+            min-height: 400px;
+            position: relative;
+            padding: 0 .5rem;
+            overflow: hidden;
+        }
+        .ctrl-wrap{
+            height: 60px;
+        }
+        .ctrl-wrap > a{
+            display: inline-block;
+            width: 120px;
+            height: 34px;
+            background: url(./images/bg_btn_1.png);
+            background-size: 120px 34px;
+            background-repeat: no-repeat;
+            line-height: 34px;
+            color: #904e00;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .card{
+            display: none;
+            position: absolute;
+            margin: auto;
+            width: 19rem;
+            height: 100%;
+            box-sizing: border-box;
+            padding: .5rem 0;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .card.one{
+            background-image: url(./images/style_1/bg.png);
+        }
+        .card.two{
+            background-image: url(./images/style_2/bg.png);
+        }
+        .card.thre{
+            background-image: url(./images/style_3/bg.png);
+        }
+        .card.four{
+            background-image: url(./images/style_4/bg.png);
+        }
+        .card.active{
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .input-area > input{
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            background: transparent;
+        }
+        .card > .word-area,
+        .card > .input-area{
+            width: 14rem;
+            box-sizing: border-box;
+        }
+        .card > .word-area{
+            height: 14rem;
+            padding: 4.5rem 4rem;
+            text-align: center;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .card.one > .word-area{
+            background-image: url(./images/style_1/block.png);
+        }
+        .card.two > .word-area{
+            background-image: url(./images/style_2/block.png);
+        }
+        .card.thre > .word-area{
+            background-image: url(./images/style_3/block.png);
+        }
+        .card.four > .word-area{
+            margin-top: 2rem;
+            height: 11rem;
+            width: 13rem;
+            padding: 2.5rem 3.5rem;
+            background-image: url(./images/style_4/block.png);
+        }
+
+        .card > .input-area{
+            height: 2.425612rem;
+            padding: 4px 10px;
+            background-size: 14rem 2.425612rem;
+            background-repeat: no-repeat;
+        }
+        .card.one > .input-area{
+            background-image: url(./images/style_1/button.png);
+        }
+        .card.two > .input-area{
+            background-image: url(./images/style_2/button.png);
+        }
+        .card.thre > .input-area{
+            background-image: url(./images/style_3/button.png);
+        }
+        .card.four > .input-area{
+            background-image: url(./images/style_4/button.png);
+        }
+
+        .card > .qrcode{
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .preview-wrap{
+            position: absolute;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            padding: 0 0.5rem;
+            background: #FFF;
+            box-sizing: border-box;
+            display: none;
+        }
+        .preview-wrap.active{
+            display: block;
+        }
+        .canvas-wrap{
+            height: calc(100% - 80px);
+        }
+        img.canvas-bg{
+            display: none;
+            width: 19rem;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/animate.css">
+    <script src="./js/refreshRem.js"></script>
+</head>
+<body>
+    <img class="canvas-bg" src="./images/share/01.png" alt="背景图">
+    <img class="canvas-bg" src="./images/share/02.png" alt="背景图">
+    <img class="canvas-bg" src="./images/share/03.png" alt="背景图">
+    <img class="canvas-bg" src="./images/share/04.png" alt="背景图">
+    <section class="preview-wrap animated">
+        <div class="canvas-wrap">
+            <canvas id="mycan" class="mycan">
+                Your Browser Cannot Support Canvas!
+            </canvas>
+        </div>
+    </section>
+    <section class="logo-wrap">
+        <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
+        <img class="animated" src="./images/style_2/logo.png" alt="会分期">
+        <img class="animated" src="./images/style_3/logo.png" alt="会分期">
+        <img class="animated" src="./images/style_4/logo.png" alt="会分期">
+    </section>
+    <section class="card-wrap">
+        <div class="card one animated active">
+            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="input-area">
+                <input type="text" placeholder="请输入您的名字">
+            </div>
+            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
+        </div>
+        <div class="card two animated">
+            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="input-area">
+                <input type="text" placeholder="请输入您的名字">
+            </div>
+            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
+        </div>
+        <div class="card thre animated">
+            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="input-area">
+                <input type="text" placeholder="请输入您的名字">
+            </div>
+            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
+        </div>
+        <div class="card four animated">
+            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="input-area">
+                <input type="text" placeholder="请输入您的名字">
+            </div>
+            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
+        </div>
+    </section>
+    <section class="ctrl-wrap flex alicen justaround">
+        <a href="javascript:" id="shake_btn">换一换</a>
+        <a href="javascript:" id="preview_btn">预览</a>
+    </section>
+    <script>
+        function Init() {
+            var bgs = document.querySelectorAll('img.canvas-bg')
+            var cards = document.querySelectorAll('div.card')
+            var logos = document.querySelectorAll('.logo-wrap > img')
+            var view = document.querySelector('section.preview-wrap')
+            var b_shake = document.querySelector('#shake_btn')
+            var b_preview = document.querySelector('#preview_btn')
+            var curIndex = 0
+            var canShake = true
+            var cur_card, next_card, cur_logo, next_logo;
+
+            function listening() {
+                cards.forEach(function(card){
+                    card.addEventListener('animationend', function(){
+                        cur_card.classList.remove('active')
+                        cur_card.classList.remove('zoomOutLeft')
+                        next_card.classList.remove('zoomInRight')
+
+                        cur_logo.classList.remove('active')
+                        cur_logo.classList.remove('fadeOut')
+                        next_logo.classList.remove('fadeIn')
+
+                        canShake = true
+                    })
+                })
+                b_shake.addEventListener('click', shake)
+                b_preview.addEventListener('click', preview)
+            }
+
+            function shake() {
+                if (!canShake) return
+                canShake = false
+                cur_card = cards[curIndex]
+                cur_logo = logos[curIndex]
+                curIndex = (++curIndex)%4
+                next_card =  cards[curIndex]
+                next_logo =  logos[curIndex]
+
+                cur_logo.classList.add('fadeOut')
+                next_logo.classList.add('active')
+                next_logo.classList.add('fadeIn')
+
+                cur_card.classList.add('zoomOutLeft')
+                next_card.classList.add('active')
+                next_card.classList.add('zoomInRight')
+            }
+
+            function preview() {
+                view.classList.add('active')
+                drawing()
+            }
+
+            function drawing() {
+                var wrap = document.querySelector('div.canvas-wrap')
+                var mycan = document.querySelector('#mycan')
+                var _w = wrap.offsetWidth
+                var _h = wrap.offsetHeight
+                var _rem = window.rem
+                var ctx = mycan.getContext('2d')
+
+                mycan.setAttribute('width', _w)
+                mycan.setAttribute('height', _h)
+
+                ctx.clearRect(0, 0, _w, _h)
+
+                ctx.drawImage(bgs[curIndex], 0, 0, _w, _h)
+            }
+
+            listening()
+        }
+
+        Init()
+    </script>
+</body>
+</html>
