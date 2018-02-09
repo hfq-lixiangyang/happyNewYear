@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Title</title>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/114315/46871/5a7dcb7cf629d800d44fe7ba.css' rel='stylesheet' type='text/css' />
     <style>
         ::-webkit-scrollbar{
             width: 0;
@@ -20,10 +21,6 @@
         }
         a{
             text-decoration: none;
-        }
-        @font-face {
-            font-family: "BenMo";
-            src: url(./font/font.ttf);
         }
         input[type='text']:focus{
             outline: none;
@@ -187,16 +184,19 @@
             z-index: 9999;
             width: 100%;
             height: 100%;
-            padding: 0 0.5rem;
             background: #FFF;
             box-sizing: border-box;
             display: none;
         }
         .preview-wrap.active{
-            display: block;
-        }
-        .canvas-wrap{
-            height: calc(100% - 80px);
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+            align-items: center;
+            -webkit-align-items: center;
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
         }
         img.canvas-bg{
             display: none;
@@ -212,11 +212,7 @@
     <img class="canvas-bg" src="./images/share/03.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/04.png" alt="背景图">
     <section class="preview-wrap animated">
-        <div class="canvas-wrap">
-            <canvas id="mycan" class="mycan">
-                Your Browser Cannot Support Canvas!
-            </canvas>
-        </div>
+        <img id="preview" class="preview" alt="预览图">
     </section>
     <section class="logo-wrap">
         <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
@@ -226,7 +222,7 @@
     </section>
     <section class="card-wrap">
         <div class="card one animated active">
-            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="word-area css10208c255a1be8b">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
             <div class="input-area">
                 <input type="text" placeholder="请输入您的名字">
             </div>
@@ -258,6 +254,9 @@
         <a href="javascript:" id="shake_btn">换一换</a>
         <a href="javascript:" id="preview_btn">预览</a>
     </section>
+    <canvas id="mycan" class="mycan" width="670" height="966">
+        Your Browser Cannot Support Canvas!
+    </canvas>
     <script>
         function Init() {
             var bgs = document.querySelectorAll('img.canvas-bg')
@@ -266,9 +265,199 @@
             var view = document.querySelector('section.preview-wrap')
             var b_shake = document.querySelector('#shake_btn')
             var b_preview = document.querySelector('#preview_btn')
+            var mycan = document.querySelector('#mycan')
+            var preview = document.querySelector('#preview')
+            var ctx = mycan.getContext('2d')
             var curIndex = 0
             var canShake = true
             var cur_card, next_card, cur_logo, next_logo;
+
+            const BLESS = [
+                [
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['新春福旺鸿运开', '佳节吉祥如意来']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['好运鸿福精神旺', '合家天伦喜洋洋']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['金色年华盛世昌', '新年新岁人双畅']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['百花争春竞绽放', '年年有余兆吉祥']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['年年难干年年干', '事事难成事难成']
+                    }
+                ],
+                [
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 338,
+                        left: 290,
+                        size: 36,
+                        txts: ['灼灼桃花十里', '我的心里只有你']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 293,
+                        left: 290,
+                        size: 36,
+                        txts: ['生活不止眼前的枸杞', '还有开单和业绩']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['心在哪里', '哪里就有风景']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['爱在哪里', '哪里就有感动']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['租在哪里', '哪里就是家']
+                    }
+                ],
+                [
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['愿你历尽千帆', '归来仍是少年']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 246,
+                        size: 36,
+                        txts: ['幽香佛面', '紫气兆祥', '祝生意如春浓', '财源似水来']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 222,
+                        size: 36,
+                        txts: ['祝您在新的一年', '生意兴隆', '财源广进', '客户临门', '日进斗金']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['志在哪里', '哪里就有成功']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 266,
+                        size: 36,
+                        txts: ['生活就像租房', '无论期限', '全凭选择']
+                    }
+                ],
+                [
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 460,
+                        left: 150,
+                        size: 30,
+                        txts: ['想与你一同在十里云海翻腾', '          旋转跳跃不停歇']
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#3bbcce',
+                        top: 370,
+                        left: 250,
+                        size: 30,
+                        txts: ['好想日日都能', '梦见你', '这样我会觉得睡觉', '真是个好活动']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 420,
+                        left: 220,
+                        size: 36,
+                        txts: ['新年好  新年到', '     棉裤一脱', ' 春姑娘就来了']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 366,
+                        left: 210,
+                        size: 26,
+                        txts: ['   为了不让新年计划', '   到最后都实现不了', '你应该从新年第一天', '        就开始努力', '                ....', '努力不要制定新年计划']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 410,
+                        left: 190,
+                        size: 26,
+                        txts: ['我的新年愿望是新的一年', '      不要像现在一样穷', '        后来愿望实现了', '    ╥﹏╥我比现在更穷了']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 380,
+                        left: 220,
+                        size: 28,
+                        txts: ['新年想送你一辆车', '    可惜汽车太贵', '         火车太长', '      自行车太累', '    还是送你风车', '      经济又实惠']
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 460,
+                        left: 168,
+                        size: 34,
+                        txts: ['祝四海八荒的各位仙友', '早日飞升上神']
+                    }
+                ]
+            ]
 
             function listening() {
                 cards.forEach(function(card){
@@ -284,11 +473,11 @@
                         canShake = true
                     })
                 })
-                b_shake.addEventListener('click', shake)
-                b_preview.addEventListener('click', preview)
+                b_shake.addEventListener('click', doShake)
+                b_preview.addEventListener('click', genPreview)
             }
 
-            function shake() {
+            function doShake() {
                 if (!canShake) return
                 canShake = false
                 cur_card = cards[curIndex]
@@ -306,25 +495,59 @@
                 next_card.classList.add('zoomInRight')
             }
 
-            function preview() {
-                view.classList.add('active')
+            function genPreview() {
                 drawing()
             }
 
             function drawing() {
-                var wrap = document.querySelector('div.canvas-wrap')
-                var mycan = document.querySelector('#mycan')
-                var _w = wrap.offsetWidth
-                var _h = wrap.offsetHeight
-                var _rem = window.rem
-                var ctx = mycan.getContext('2d')
+                var _w = mycan.width
+                var _h = mycan.height
+                var w = window.innerWidth
+                var h = window.innerHeight - 140
+                var bless = BLESS[curIndex]
+                var rand = ~~(Math.random()*bless.length)
+                var top = 0
+                var left = 0
+                var size = 40
+                var color = '#FFF'
+                var dirIsVertical = true
 
-                mycan.setAttribute('width', _w)
-                mycan.setAttribute('height', _h)
+                bless = bless[rand]
+                top = bless.top
+                left = bless.left
+                size = bless.size
+                color = bless.color || color
+                dirIsVertical = bless.dir === 'vertical'
+
+                w = h*(_w/_h)
 
                 ctx.clearRect(0, 0, _w, _h)
-
+                ctx.fillStyle = "#FFF"
+                ctx.fillRect(0, 0, _w, _h)
                 ctx.drawImage(bgs[curIndex], 0, 0, _w, _h)
+
+                bless.txts.forEach(function(txt){
+                    var len = txt.length >> 0
+                    var i = 0
+                    var _top = top
+                    ctx.font = size + "px 'ruibo10208c255a1be8b'"
+                    ctx.fillStyle = color
+                    if (dirIsVertical) {
+                        for (; i < len; i++) {
+                            ctx.fillText(txt[i], left, _top)
+                            _top += (size + 2)
+                        }
+                        left += (size + 12)
+                    } else {
+                        ctx.fillText(txt, left, top)
+                        top += (size + 12)
+                    }
+                })
+
+                preview.src = mycan.toDataURL()
+                preview.setAttribute('width', w)
+                preview.setAttribute('height', h)
+                view.classList.add('active')
             }
 
             listening()
