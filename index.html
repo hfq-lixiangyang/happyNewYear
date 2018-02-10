@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Title</title>
+    <title>会分期拜年神器</title>
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/114315/46871/5a7dcb7cf629d800d44fe7ba.css' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="./css/animate.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="./js/refreshRem.js"></script>
-    <script src="./js/ResizeSensor.js"></script>
 </head>
 <body>
     <img class="canvas-bg" src="./images/share/01.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/02.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/03.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/04.png" alt="背景图">
+    <section class="preview-wrap animated active">
+        <img id="preview" class="preview" alt="预览图">
+        <div class="remake-wrap">
+            <div class="separ flex alicen justbetween">
+                <span></span>
+                <p>长按保存图片</p>
+                <span></span>
+            </div>
+        </div>
+    </section>
     <main>
-        <section class="preview-wrap animated">
-            <img id="preview" class="preview" alt="预览图">
-        </section>
         <section class="logo-wrap">
             <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
             <img class="animated" src="./images/style_2/logo.png" alt="会分期">
@@ -27,32 +33,28 @@
         </section>
         <section class="card-wrap">
             <div class="card one animated active">
-                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="word-area flex alicen justcen"></div>
                 <div class="input-area">
-                    <input type="text" placeholder="请输入您的名字">
+                    <input type="text" maxlength="4" placeholder="请输入您的名字">
                 </div>
-                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
             <div class="card two animated">
-                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="word-area flex alicen justcen"></div>
                 <div class="input-area">
-                    <input type="text" placeholder="请输入您的名字">
+                    <input type="text" maxlength="4" placeholder="请输入您的名字">
                 </div>
-                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
             <div class="card thre animated">
-                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="word-area flex alicen justcen"></div>
                 <div class="input-area">
-                    <input type="text" placeholder="请输入您的名字">
+                    <input type="text" maxlength="4" placeholder="请输入您的名字">
                 </div>
-                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
             <div class="card four animated">
-                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="word-area flex alicen justcen"></div>
                 <div class="input-area">
-                    <input type="text" placeholder="请输入您的名字">
+                    <input type="text" maxlength="4" placeholder="请输入您的名字">
                 </div>
-                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
         </section>
         <section class="ctrl-wrap flex alicen justaround">
@@ -275,6 +277,7 @@
                 ]
             ]
 
+            var userName = ''
             var cardWrap = document.querySelector('section.card-wrap')
             var bgs = document.querySelectorAll('img.canvas-bg')
             var cards = document.querySelectorAll('div.card')
@@ -294,6 +297,10 @@
 
             function listening() {
                 cards.forEach(function(card){
+                    var eInput = card.querySelector('input')
+                    eInput.addEventListener('input', function(){
+                        userName = this.value
+                    })
                     card.addEventListener('animationend', function(){
                         cur_card.classList.remove('active')
                         cur_card.classList.remove('zoomOutLeft')
@@ -303,12 +310,13 @@
                         cur_logo.classList.remove('fadeOut')
                         next_logo.classList.remove('fadeIn')
 
+                        eInput.value = userName
+
                         canShake = true
                     })
                 })
                 b_shake.addEventListener('click', doShake)
                 b_preview.addEventListener('click', genPreview)
-                new ResizeSensor(cardWrap, layout)
             }
 
             function doShake() {
@@ -344,7 +352,12 @@
             }
 
             function genPreview() {
-                drawing()
+                cards[curIndex].querySelector('input').blur()
+                if (!userName.trim()) {
+                    alert('姓名不可为空！')
+                    return false
+                }
+                setTimeout(drawing, 1000)
             }
 
             function drawing() {
@@ -356,6 +369,11 @@
                 var size = 40
                 var color = '#FFF'
                 var dirIsVertical = true
+                var fromTxt = ''
+                var fromLeft = 0
+
+                const FROMTOPS = [750, 750, 750, 744]
+                const FROMCOLORS = ['#935106', '#935106', '#935106', '#5C5B5C']
 
                 top = _bless.top
                 left = _bless.left
@@ -387,6 +405,12 @@
                         top += (size + 12)
                     }
                 })
+
+                fromTxt = '来自“' + userName + '”的祝福'
+                ctx.font = '30px Droid Sans,Hiragino Sans GB,Tahoma'
+                ctx.fillStyle = FROMCOLORS[curIndex]
+                fromLeft = (_w - ctx.measureText(fromTxt).width)/2
+                ctx.fillText(fromTxt, fromLeft, FROMTOPS[curIndex])
 
                 preview.src = mycan.toDataURL()
                 preview.setAttribute('width', w)
