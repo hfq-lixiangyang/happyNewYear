@@ -65,10 +65,9 @@
         }
         .card-wrap{
             height: calc(100% - 132px);
-            min-height: 400px;
+            width: 19rem;
+            margin: auto;
             position: relative;
-            padding: 0 .5rem;
-            overflow: hidden;
         }
         .ctrl-wrap{
             height: 60px;
@@ -111,11 +110,7 @@
             background-image: url(./images/style_4/bg.png);
         }
         .card.active{
-            display: flex;
-            display: -webkit-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
+            display: block;
         }
         .input-area > input{
             display: block;
@@ -127,14 +122,18 @@
         }
         .card > .word-area,
         .card > .input-area{
-            width: 14rem;
             box-sizing: border-box;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
         }
         .card > .word-area{
-            height: 14rem;
-            padding: 4.5rem 4rem;
+            color: #ee3c21;
+            font-family: 'ruibo10208c255a1be8b';
             text-align: center;
-            background-size: 100% 100%;
+            background-size: contain;
+            background-position: center;
             background-repeat: no-repeat;
         }
 
@@ -156,6 +155,7 @@
         }
 
         .card > .input-area{
+            width: 14rem;
             height: 2.425612rem;
             padding: 4px 10px;
             background-size: 14rem 2.425612rem;
@@ -222,28 +222,28 @@
     </section>
     <section class="card-wrap">
         <div class="card one animated active">
-            <div class="word-area css10208c255a1be8b">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
             <div class="input-area">
                 <input type="text" placeholder="请输入您的名字">
             </div>
             <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
         </div>
         <div class="card two animated">
-            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
             <div class="input-area">
                 <input type="text" placeholder="请输入您的名字">
             </div>
             <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
         </div>
         <div class="card thre animated">
-            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
             <div class="input-area">
                 <input type="text" placeholder="请输入您的名字">
             </div>
             <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
         </div>
         <div class="card four animated">
-            <div class="word-area">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
             <div class="input-area">
                 <input type="text" placeholder="请输入您的名字">
             </div>
@@ -270,8 +270,10 @@
             var ctx = mycan.getContext('2d')
             var curIndex = 0
             var canShake = true
-            var cur_card, next_card, cur_logo, next_logo;
+            var rand = 0
+            var cur_card, next_card, cur_logo, next_logo, bless;
 
+            const PROPORTION = 670/966
             const BLESS = [
                 [
                     {
@@ -406,7 +408,7 @@
                         top: 460,
                         left: 150,
                         size: 30,
-                        txts: ['想与你一同在十里云海翻腾', '          旋转跳跃不停歇']
+                        txts: ['想与你一同在十里云海翻腾', '\n\n\n\n\n旋转跳跃不停歇']
                     },
                     {
                         dir: 'vertical',
@@ -422,7 +424,7 @@
                         top: 420,
                         left: 220,
                         size: 36,
-                        txts: ['新年好  新年到', '     棉裤一脱', ' 春姑娘就来了']
+                        txts: ['新年好\n新年到', '棉裤一脱', '春姑娘就来了']
                     },
                     {
                         dir: 'horizontal',
@@ -430,7 +432,7 @@
                         top: 366,
                         left: 210,
                         size: 26,
-                        txts: ['   为了不让新年计划', '   到最后都实现不了', '你应该从新年第一天', '        就开始努力', '                ....', '努力不要制定新年计划']
+                        txts: ['\n\n为了不让新年计划', '\n\n到最后都实现不了', '\n你应该从新年第一天', '\n\n\n\n\n就开始努力', '\n\n\n\n\n\n\n\n\n....', '努力不要制定新年计划']
                     },
                     {
                         dir: 'horizontal',
@@ -438,7 +440,7 @@
                         top: 410,
                         left: 190,
                         size: 26,
-                        txts: ['我的新年愿望是新的一年', '      不要像现在一样穷', '        后来愿望实现了', '    ╥﹏╥我比现在更穷了']
+                        txts: ['我的新年愿望是新的一年', '\n\n\n不要像现在一样穷', '\n\n\n\n后来愿望实现了', '\n\n╥﹏╥我比现在更穷了']
                     },
                     {
                         dir: 'horizontal',
@@ -446,7 +448,7 @@
                         top: 380,
                         left: 220,
                         size: 28,
-                        txts: ['新年想送你一辆车', '    可惜汽车太贵', '         火车太长', '      自行车太累', '    还是送你风车', '      经济又实惠']
+                        txts: ['新年想送你一辆车', '\n\n可惜汽车太贵', '\n\n\n\n火车太长', '\n\n\n自行车太累', '\n\n还是送你风车', '\n\n\n经济又实惠']
                     },
                     {
                         dir: 'horizontal',
@@ -458,6 +460,8 @@
                     }
                 ]
             ]
+
+            bless = BLESS[curIndex]
 
             function listening() {
                 cards.forEach(function(card){
@@ -483,8 +487,12 @@
                 cur_card = cards[curIndex]
                 cur_logo = logos[curIndex]
                 curIndex = (++curIndex)%4
-                next_card =  cards[curIndex]
-                next_logo =  logos[curIndex]
+                next_card = cards[curIndex]
+                next_logo = logos[curIndex]
+                bless = BLESS[curIndex]
+                rand = ~~(Math.random()*bless.length)
+
+                next_card.children[0].style.color = bless[rand].color
 
                 cur_logo.classList.add('fadeOut')
                 next_logo.classList.add('active')
@@ -504,20 +512,18 @@
                 var _h = mycan.height
                 var w = window.innerWidth
                 var h = window.innerHeight - 140
-                var bless = BLESS[curIndex]
-                var rand = ~~(Math.random()*bless.length)
                 var top = 0
                 var left = 0
                 var size = 40
                 var color = '#FFF'
                 var dirIsVertical = true
+                var _bless = bless[rand]
 
-                bless = bless[rand]
-                top = bless.top
-                left = bless.left
-                size = bless.size
-                color = bless.color || color
-                dirIsVertical = bless.dir === 'vertical'
+                top = _bless.top
+                left = _bless.left
+                size = _bless.size
+                color = _bless.color || color
+                dirIsVertical = _bless.dir === 'vertical'
 
                 w = h*(_w/_h)
 
@@ -526,7 +532,7 @@
                 ctx.fillRect(0, 0, _w, _h)
                 ctx.drawImage(bgs[curIndex], 0, 0, _w, _h)
 
-                bless.txts.forEach(function(txt){
+                _bless.txts.forEach(function(txt){
                     var len = txt.length >> 0
                     var i = 0
                     var _top = top
@@ -550,6 +556,34 @@
                 view.classList.add('active')
             }
 
+            function layout() {
+                var ww, wp, wt, it;
+                var cardWrap = document.querySelector('section.card-wrap')
+                var rect = cardWrap.getBoundingClientRect()
+                var w = rect.width
+                var h = rect.height
+                var isWider = (w/h) > PROPORTION
+
+                const WORDPADS = [180, 110, 100, 130]
+                const WORDWIDTHS = [676, 577, 537, 579]
+                const WORDTOPS = [64, 78, 118, 80]
+                const INPUTTOPS = [596, 596, 596, 630]
+
+                h = isWider ? h : w/PROPORTION
+
+                cards.forEach(function(card, index){
+                    var eWord = card.children[0]
+                    var eInput = card.children[1]
+                    ww = PROPORTION*h*(WORDWIDTHS[index]/679)
+                    wt = PROPORTION*h*(WORDTOPS[index]/608)
+                    it = PROPORTION*h*(INPUTTOPS[index]/608)
+                    wp = PROPORTION*h*(WORDPADS[index]/608)
+                    eWord.style.cssText = 'width:' + ww + 'px;height:' + ww + 'px;top:' + wt + 'px;padding:' + wp + 'px;'
+                    eInput.style.cssText = 'top:' + it + 'px;'
+                })
+            }
+
+            layout()
             listening()
         }
 
