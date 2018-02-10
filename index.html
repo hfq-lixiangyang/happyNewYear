@@ -14,14 +14,13 @@
     <img class="canvas-bg" src="./images/share/02.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/03.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/04.png" alt="背景图">
-    <section class="preview-wrap animated active">
-        <img id="preview" class="preview" alt="预览图">
+    <section class="preview-wrap">
+        <img id="preview" class="preview animated" alt="预览图">
         <div class="remake-wrap">
             <div class="separ flex alicen justbetween">
-                <span></span>
-                <p>长按保存图片</p>
-                <span></span>
+                <span></span><p>长按保存图片</p><span></span>
             </div>
+            <a href="javascript:" class="ctrl-btn" id="remake_btn">重新制作</a>
         </div>
     </section>
     <main>
@@ -58,8 +57,8 @@
             </div>
         </section>
         <section class="ctrl-wrap flex alicen justaround">
-            <a href="javascript:" id="shake_btn">换一换</a>
-            <a href="javascript:" id="preview_btn">预览</a>
+            <a href="javascript:" class="ctrl-btn" id="shake_btn">换一换</a>
+            <a href="javascript:" class="ctrl-btn" id="preview_btn">预览</a>
         </section>
     </main>
     <canvas id="mycan" class="mycan" width="670" height="966">
@@ -285,6 +284,7 @@
             var view = document.querySelector('section.preview-wrap')
             var b_shake = document.querySelector('#shake_btn')
             var b_preview = document.querySelector('#preview_btn')
+            var b_remake = document.querySelector('#remake_btn')
             var mycan = document.querySelector('#mycan')
             var preview = document.querySelector('#preview')
             var ctx = mycan.getContext('2d')
@@ -317,6 +317,15 @@
                 })
                 b_shake.addEventListener('click', doShake)
                 b_preview.addEventListener('click', genPreview)
+                b_remake.addEventListener('click', doRemake)
+                preview.addEventListener('animationend', function(){
+                    preview.classList.remove('rotateIn')
+                })
+            }
+
+            function doRemake() {
+                view.classList.remove('active')
+                preview.classList.remove('active')
             }
 
             function doShake() {
@@ -416,6 +425,8 @@
                 preview.setAttribute('width', w)
                 preview.setAttribute('height', h)
                 view.classList.add('active')
+                preview.classList.add('active')
+                preview.classList.add('rotateIn')
             }
 
             function layout() {

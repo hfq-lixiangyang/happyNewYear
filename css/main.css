@@ -66,16 +66,6 @@ input[type='text']:focus{
     height: 60px;
 }
 .ctrl-wrap > a{
-    display: inline-block;
-    width: 120px;
-    height: 34px;
-    background: url(../images/bg_btn_1.png);
-    background-size: 120px 34px;
-    background-repeat: no-repeat;
-    line-height: 34px;
-    color: #904e00;
-    font-size: 16px;
-    text-align: center;
 }
 
 .card{
@@ -188,6 +178,12 @@ input[type='text']:focus{
     justify-content: space-around;
     -webkit-justify-content: space-around;
 }
+.preview-wrap > .preview{
+    display: none;
+}
+.preview-wrap > .preview.active{
+    display: block;
+}
 img.canvas-bg{
     display: none;
     width: 19rem;
@@ -197,13 +193,32 @@ canvas.mycan{
 }
 .remake-wrap{
     width: 100%;
+    text-align: center;
+}
+.remake-wrap .separ{
+    padding: 0 1rem 10px 1rem;
 }
 .remake-wrap .separ span{
     width: 100%;
     height: 1px;
-    background: #000;
+    transform: scaleY(0.5);
+    background: #EFC368;
 }
 .remake-wrap .separ p{
-    margin: 0 10px;
-    width: 200px;
+    margin: 0 20px;
+    width: 100%;
+    color: #AA7844;
+    text-align: center;
+}
+.ctrl-btn{
+    display: inline-block;
+    width: 120px;
+    height: 34px;
+    background: url(../images/bg_btn_1.png);
+    background-size: 120px 34px;
+    background-repeat: no-repeat;
+    line-height: 34px;
+    color: #904e00;
+    font-size: 16px;
+    text-align: center;
 }
