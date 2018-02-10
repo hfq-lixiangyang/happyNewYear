@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>会分期拜年神器</title>
-    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/114315/46871/5a7dcb7cf629d800d44fe7ba.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/114315/47755/5a7ebd0bf629d800d44fe818.css' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="./css/animate.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="./js/refreshRem.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
 <body>
     <img class="canvas-bg" src="./images/share/01.png" alt="背景图">
@@ -23,6 +24,8 @@
             <a href="javascript:" class="ctrl-btn" id="remake_btn">重新制作</a>
         </div>
     </section>
+    <a id="music-ctrl" href="javascript:" class="music-ctrl"></a>
+    <audio id="audio" src="./music/summer.mp3"></audio>
     <main>
         <section class="logo-wrap">
             <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
@@ -71,7 +74,7 @@
                 [
                     {
                         dir: 'horizontal',
-                        color: '#ee3c21',
+                        color: '#935106',
                         top: 440,
                         left: 168,
                         size: 48,
@@ -80,7 +83,7 @@
                     },
                     {
                         dir: 'horizontal',
-                        color: '#ee3c21',
+                        color: '#935106',
                         top: 440,
                         left: 168,
                         size: 48,
@@ -89,7 +92,7 @@
                     },
                     {
                         dir: 'horizontal',
-                        color: '#ee3c21',
+                        color: '#935106',
                         top: 440,
                         left: 168,
                         size: 48,
@@ -98,7 +101,7 @@
                     },
                     {
                         dir: 'horizontal',
-                        color: '#ee3c21',
+                        color: '#935106',
                         top: 440,
                         left: 168,
                         size: 48,
@@ -107,7 +110,7 @@
                     },
                     {
                         dir: 'horizontal',
-                        color: '#ee3c21',
+                        color: '#935106',
                         top: 440,
                         left: 168,
                         size: 48,
@@ -165,7 +168,7 @@
                 [
                     {
                         dir: 'vertical',
-                        color: 'gold',
+                        color: '#fbe6b8',
                         top: 348,
                         left: 290,
                         size: 36,
@@ -174,7 +177,7 @@
                     },
                     {
                         dir: 'vertical',
-                        color: 'gold',
+                        color: '#fbe6b8',
                         top: 348,
                         left: 246,
                         size: 36,
@@ -183,7 +186,7 @@
                     },
                     {
                         dir: 'vertical',
-                        color: 'gold',
+                        color: '#fbe6b8',
                         top: 348,
                         left: 222,
                         size: 36,
@@ -192,7 +195,7 @@
                     },
                     {
                         dir: 'vertical',
-                        color: 'gold',
+                        color: '#fbe6b8',
                         top: 348,
                         left: 290,
                         size: 36,
@@ -201,7 +204,7 @@
                     },
                     {
                         dir: 'vertical',
-                        color: 'gold',
+                        color: '#fbe6b8',
                         top: 348,
                         left: 266,
                         size: 36,
@@ -287,7 +290,10 @@
             var b_remake = document.querySelector('#remake_btn')
             var mycan = document.querySelector('#mycan')
             var preview = document.querySelector('#preview')
+            var audio = document.querySelector('#audio')
+            var musicBtn = document.querySelector('#music-ctrl')
             var ctx = mycan.getContext('2d')
+            var toArray = Array.prototype.slice
             var curIndex = 0
             var canShake = true
             var bless = BLESS[curIndex]
@@ -296,15 +302,17 @@
             var cur_card, next_card, cur_logo, next_logo;
 
             function listening() {
-                cards.forEach(function(card){
+                var animationend = getAnimationend()
+                var isStop = true
+                toArray.call(cards).forEach(function(card){
                     var eInput = card.querySelector('input')
                     eInput.addEventListener('input', function(){
                         userName = this.value
                     })
-                    card.addEventListener('animationend', function(){
+                    card.addEventListener(animationend, function(){
                         cur_card.classList.remove('active')
-                        cur_card.classList.remove('zoomOutLeft')
-                        next_card.classList.remove('zoomInRight')
+                        cur_card.classList.remove('fadeOutLeft')
+                        next_card.classList.remove('fadeInRight')
 
                         cur_logo.classList.remove('active')
                         cur_logo.classList.remove('fadeOut')
@@ -318,9 +326,37 @@
                 b_shake.addEventListener('click', doShake)
                 b_preview.addEventListener('click', genPreview)
                 b_remake.addEventListener('click', doRemake)
-                preview.addEventListener('animationend', function(){
+                preview.addEventListener(animationend, function(){
                     preview.classList.remove('rotateIn')
                 })
+                musicBtn.addEventListener('click', function() {
+                    if (isStop) {
+                        this.classList.add('play')
+                        audio.play()
+                    } else {
+                        this.classList.remove('play')
+                        audio.pause()
+                    }
+                    isStop = !isStop
+                })
+                audio.addEventListener('ended', function(){
+                    musicBtn.classList.remove('play')
+                    isStop = true
+                })
+            }
+
+            function getAnimationend() {
+                var el = document.createElement('div')
+                const VENDERS = {
+                    animation: 'animationend',
+                    OAnimation: 'oAnimationEnd',
+                    MozAnimation: 'mozAnimationEnd',
+                    WebkitAnimation: 'webkitAnimationEnd',
+                }
+
+                for (var name in VENDERS) {
+                    if (el.style[name] !== undefined) return VENDERS[name]
+                }
             }
 
             function doRemake() {
@@ -355,9 +391,9 @@
                 next_logo.classList.add('active')
                 next_logo.classList.add('fadeIn')
 
-                cur_card.classList.add('zoomOutLeft')
+                cur_card.classList.add('fadeOutLeft')
                 next_card.classList.add('active')
-                next_card.classList.add('zoomInRight')
+                next_card.classList.add('fadeInRight')
             }
 
             function genPreview() {
@@ -401,7 +437,7 @@
                     var len = txt.length >> 0
                     var i = 0
                     var _top = top
-                    ctx.font = size + "px 'ruibo10208c255a1be8b'"
+                    ctx.font = size + "px 'SourceHanSerif-10243bbe151be8b'"
                     ctx.fillStyle = color
                     if (dirIsVertical) {
                         for (; i < len; i++) {
@@ -443,7 +479,7 @@
 
                 h = isWider ? h : w/PROPORTION
 
-                cards.forEach(function(card, index){
+                toArray.call(cards).forEach(function(card, index){
                     var eWord = card.children[0]
                     var eInput = card.children[1]
                     ww = PROPORTION*h*(WORDWIDTHS[index]/679)
@@ -455,6 +491,42 @@
                     eInput.style.cssText = 'top:' + it + 'px;'
                 })
             }
+
+            function fetch(url, data, callback) {
+                var xhr = new XMLHttpRequest()
+                var fd = new FormData()
+                xhr.open('post', url, false)
+                xhr.onreadystatechange = function(){
+                    if (this.status === 200 && this.readyState === 4){
+                        callback(JSON.parse(this.response))
+                    }
+                }
+                Object.getOwnPropertyNames(data).forEach(function(key){
+                    fd.append(key, data[key])
+                })
+                xhr.send(fd)
+            }
+
+            function fetchDowm(res) {
+                var conf = {
+                    debug: false,
+                    jsApiList: ['onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareTimeline']
+                }
+                var shareConf = {
+                    title   : '会分期拜年神器',
+                    link    : window.location.href,
+                    desc    : '由会分期研究院发布的《会分期品牌公寓行业数据报告》，希望通过对行业现状的呈现，为租房行业的伙伴们提供有价值的参考',
+                    imgUrl  : '//m.huizhaofang.com:8000/images/share_icon.jpg'
+                }
+                wx.config(Object.assign(conf, res.result))
+                wx.ready(function(){
+                    wx.onMenuShareTimeline(shareConf)
+                    wx.onMenuShareQQ(shareConf)
+                    wx.onMenuShareAppMessage(shareConf)
+                })
+            }
+
+            fetch('//www.huifenqi.com/c/reqwxjsdkauth/', {platform: 'wx'}, fetchDowm)
 
             layout()
             listening()
