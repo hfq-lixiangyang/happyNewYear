@@ -1,0 +1,202 @@
+::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+html,body,main{
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    overflow: scroll;
+}
+body,main,section{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+input[type='text']:focus{
+    outline: none;
+}
+.flex{
+    display: flex;
+    display: -webkit-flex;
+}
+.flex.column{
+    flex-direction: column;
+    -webkit-flex-direction: column;
+}
+.flex.alicen{
+    align-items: center;
+    -webkit-align-items: center;
+}
+.flex.justcen{
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.flex.justbetween{
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+.flex.justaround{
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+.logo-wrap{
+    position: relative;
+    height: 52px;
+    padding: 10px .5rem;
+}
+.logo-wrap > img{
+    position: absolute;
+    width: 142px;
+    height: 52px;
+    display: none;
+}
+.logo-wrap > img.active{
+    display: block;
+}
+.card-wrap{
+    height: calc(100% - 132px);
+    width: 19rem;
+    margin: auto;
+    position: relative;
+}
+.ctrl-wrap{
+    height: 60px;
+}
+.ctrl-wrap > a{
+    display: inline-block;
+    width: 120px;
+    height: 34px;
+    background: url(../images/bg_btn_1.png);
+    background-size: 120px 34px;
+    background-repeat: no-repeat;
+    line-height: 34px;
+    color: #904e00;
+    font-size: 16px;
+    text-align: center;
+}
+
+.card{
+    display: none;
+    position: absolute;
+    margin: auto;
+    width: 19rem;
+    height: 100%;
+    box-sizing: border-box;
+    padding: .5rem 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.card.one{
+    background-image: url(../images/style_1/bg.png);
+}
+.card.two{
+    background-image: url(../images/style_2/bg.png);
+}
+.card.thre{
+    background-image: url(../images/style_3/bg.png);
+}
+.card.four{
+    background-image: url(../images/style_4/bg.png);
+}
+.card.active{
+    display: block;
+}
+.input-area > input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    background: transparent;
+}
+.card > .word-area,
+.card > .input-area{
+    box-sizing: border-box;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.card > .word-area{
+    color: #ee3c21;
+    font-family: 'ruibo10208c255a1be8b';
+    text-align: center;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    white-space: pre-wrap;
+    font-size: 14px;
+}
+
+.card.one > .word-area{
+    background-image: url(../images/style_1/block.png);
+}
+.card.two > .word-area{
+    background-image: url(../images/style_2/block.png);
+}
+.card.thre > .word-area{
+    background-image: url(../images/style_3/block.png);
+}
+.card.four > .word-area{
+    margin-top: 2rem;
+    height: 11rem;
+    width: 13rem;
+    padding: 2.5rem 3.5rem;
+    background-image: url(../images/style_4/block.png);
+}
+
+.card > .input-area{
+    width: 14rem;
+    height: 2.425612rem;
+    padding: 4px 10px;
+    background-size: 14rem 2.425612rem;
+    background-repeat: no-repeat;
+}
+.card.one > .input-area{
+    background-image: url(../images/style_1/button.png);
+}
+.card.two > .input-area{
+    background-image: url(../images/style_2/button.png);
+}
+.card.thre > .input-area{
+    background-image: url(../images/style_3/button.png);
+}
+.card.four > .input-area{
+    background-image: url(../images/style_4/button.png);
+}
+
+.card > .qrcode{
+    width: 4rem;
+    height: 4rem;
+}
+
+.preview-wrap{
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+    box-sizing: border-box;
+    display: none;
+}
+.preview-wrap.active{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+img.canvas-bg{
+    display: none;
+    width: 19rem;
+}
+canvas.mycan{
+    display: none;
+}

@@ -5,260 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Title</title>
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/114315/46871/5a7dcb7cf629d800d44fe7ba.css' rel='stylesheet' type='text/css' />
-    <style>
-        ::-webkit-scrollbar{
-            width: 0;
-            height: 0;
-        }
-        html,body{
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        body,section{
-            padding: 0;
-            margin: 0;
-        }
-        a{
-            text-decoration: none;
-        }
-        input[type='text']:focus{
-            outline: none;
-        }
-        .flex{
-            display: flex;
-            display: -webkit-flex;
-        }
-        .flex.column{
-            flex-direction: column;
-            -webkit-flex-direction: column;
-        }
-        .flex.alicen{
-            align-items: center;
-            -webkit-align-items: center;
-        }
-        .flex.justcen{
-            justify-content: center;
-            -webkit-justify-content: center;
-        }
-        .flex.justbetween{
-            justify-content: space-between;
-            -webkit-justify-content: space-between;
-        }
-        .flex.justaround{
-            justify-content: space-around;
-            -webkit-justify-content: space-around;
-        }
-        .logo-wrap{
-            position: relative;
-            height: 52px;
-            padding: 10px .5rem;
-        }
-        .logo-wrap > img{
-            position: absolute;
-            width: 142px;
-            height: 52px;
-            display: none;
-        }
-        .logo-wrap > img.active{
-            display: block;
-        }
-        .card-wrap{
-            height: calc(100% - 132px);
-            width: 19rem;
-            margin: auto;
-            position: relative;
-        }
-        .ctrl-wrap{
-            height: 60px;
-        }
-        .ctrl-wrap > a{
-            display: inline-block;
-            width: 120px;
-            height: 34px;
-            background: url(./images/bg_btn_1.png);
-            background-size: 120px 34px;
-            background-repeat: no-repeat;
-            line-height: 34px;
-            color: #904e00;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .card{
-            display: none;
-            position: absolute;
-            margin: auto;
-            width: 19rem;
-            height: 100%;
-            box-sizing: border-box;
-            padding: .5rem 0;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .card.one{
-            background-image: url(./images/style_1/bg.png);
-        }
-        .card.two{
-            background-image: url(./images/style_2/bg.png);
-        }
-        .card.thre{
-            background-image: url(./images/style_3/bg.png);
-        }
-        .card.four{
-            background-image: url(./images/style_4/bg.png);
-        }
-        .card.active{
-            display: block;
-        }
-        .input-area > input{
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: none;
-            text-align: center;
-            background: transparent;
-        }
-        .card > .word-area,
-        .card > .input-area{
-            box-sizing: border-box;
-            position: absolute;
-            margin: auto;
-            left: 0;
-            right: 0;
-        }
-        .card > .word-area{
-            color: #ee3c21;
-            font-family: 'ruibo10208c255a1be8b';
-            text-align: center;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .card.one > .word-area{
-            background-image: url(./images/style_1/block.png);
-        }
-        .card.two > .word-area{
-            background-image: url(./images/style_2/block.png);
-        }
-        .card.thre > .word-area{
-            background-image: url(./images/style_3/block.png);
-        }
-        .card.four > .word-area{
-            margin-top: 2rem;
-            height: 11rem;
-            width: 13rem;
-            padding: 2.5rem 3.5rem;
-            background-image: url(./images/style_4/block.png);
-        }
-
-        .card > .input-area{
-            width: 14rem;
-            height: 2.425612rem;
-            padding: 4px 10px;
-            background-size: 14rem 2.425612rem;
-            background-repeat: no-repeat;
-        }
-        .card.one > .input-area{
-            background-image: url(./images/style_1/button.png);
-        }
-        .card.two > .input-area{
-            background-image: url(./images/style_2/button.png);
-        }
-        .card.thre > .input-area{
-            background-image: url(./images/style_3/button.png);
-        }
-        .card.four > .input-area{
-            background-image: url(./images/style_4/button.png);
-        }
-
-        .card > .qrcode{
-            width: 4rem;
-            height: 4rem;
-        }
-
-        .preview-wrap{
-            position: absolute;
-            z-index: 9999;
-            width: 100%;
-            height: 100%;
-            background: #FFF;
-            box-sizing: border-box;
-            display: none;
-        }
-        .preview-wrap.active{
-            display: flex;
-            display: -webkit-flex;
-            flex-direction: column;
-            -webkit-flex-direction: column;
-            align-items: center;
-            -webkit-align-items: center;
-            justify-content: space-around;
-            -webkit-justify-content: space-around;
-        }
-        img.canvas-bg{
-            display: none;
-            width: 19rem;
-        }
-    </style>
     <link rel="stylesheet" href="./css/animate.css">
+    <link rel="stylesheet" href="./css/main.css">
     <script src="./js/refreshRem.js"></script>
+    <script src="./js/ResizeSensor.js"></script>
 </head>
 <body>
     <img class="canvas-bg" src="./images/share/01.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/02.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/03.png" alt="背景图">
     <img class="canvas-bg" src="./images/share/04.png" alt="背景图">
-    <section class="preview-wrap animated">
-        <img id="preview" class="preview" alt="预览图">
-    </section>
-    <section class="logo-wrap">
-        <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
-        <img class="animated" src="./images/style_2/logo.png" alt="会分期">
-        <img class="animated" src="./images/style_3/logo.png" alt="会分期">
-        <img class="animated" src="./images/style_4/logo.png" alt="会分期">
-    </section>
-    <section class="card-wrap">
-        <div class="card one animated active">
-            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
-            <div class="input-area">
-                <input type="text" placeholder="请输入您的名字">
+    <main>
+        <section class="preview-wrap animated">
+            <img id="preview" class="preview" alt="预览图">
+        </section>
+        <section class="logo-wrap">
+            <img class="animated active" src="./images/style_1/logo.png" alt="会分期">
+            <img class="animated" src="./images/style_2/logo.png" alt="会分期">
+            <img class="animated" src="./images/style_3/logo.png" alt="会分期">
+            <img class="animated" src="./images/style_4/logo.png" alt="会分期">
+        </section>
+        <section class="card-wrap">
+            <div class="card one animated active">
+                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="input-area">
+                    <input type="text" placeholder="请输入您的名字">
+                </div>
+                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
-            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
-        </div>
-        <div class="card two animated">
-            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
-            <div class="input-area">
-                <input type="text" placeholder="请输入您的名字">
+            <div class="card two animated">
+                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="input-area">
+                    <input type="text" placeholder="请输入您的名字">
+                </div>
+                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
-            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
-        </div>
-        <div class="card thre animated">
-            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
-            <div class="input-area">
-                <input type="text" placeholder="请输入您的名字">
+            <div class="card thre animated">
+                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="input-area">
+                    <input type="text" placeholder="请输入您的名字">
+                </div>
+                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
-            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
-        </div>
-        <div class="card four animated">
-            <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
-            <div class="input-area">
-                <input type="text" placeholder="请输入您的名字">
+            <div class="card four animated">
+                <div class="word-area flex alicen justcen">新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！新年快乐！</div>
+                <div class="input-area">
+                    <input type="text" placeholder="请输入您的名字">
+                </div>
+                <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
             </div>
-            <img src="./images/logo_QRcode.jpeg" alt="" class="qrcode">
-        </div>
-    </section>
-    <section class="ctrl-wrap flex alicen justaround">
-        <a href="javascript:" id="shake_btn">换一换</a>
-        <a href="javascript:" id="preview_btn">预览</a>
-    </section>
+        </section>
+        <section class="ctrl-wrap flex alicen justaround">
+            <a href="javascript:" id="shake_btn">换一换</a>
+            <a href="javascript:" id="preview_btn">预览</a>
+        </section>
+    </main>
     <canvas id="mycan" class="mycan" width="670" height="966">
         Your Browser Cannot Support Canvas!
     </canvas>
     <script>
         function Init() {
+            const PROPORTION = 670/966
+            const BLESS = [
+                [
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['新春福旺鸿运开', '佳节吉祥如意来'],
+                        txt: '新春福旺鸿运开\r\n佳节吉祥如意来'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['好运鸿福精神旺', '合家天伦喜洋洋'],
+                        txt: '好运鸿福精神旺\r\n合家天伦喜洋洋'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['金色年华盛世昌', '新年新岁人双畅'],
+                        txt: '金色年华盛世昌\r\n新年新岁人欢畅'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['百花争春竞绽放', '年年有余兆吉祥'],
+                        txt: '百花争春竞绽放\r\n年年有余兆吉祥'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#ee3c21',
+                        top: 440,
+                        left: 168,
+                        size: 48,
+                        txts: ['年年难干年年干', '事事难成事难成'],
+                        txt: '年年难干年年干\r\n事事难成事难成'
+                    }
+                ],
+                [
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 338,
+                        left: 290,
+                        size: 36,
+                        txts: ['灼灼桃花十里', '我的心里只有你'],
+                        txt: '灼灼桃花十里\r\n我的心里只有你'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 293,
+                        left: 290,
+                        size: 36,
+                        txts: ['生活不止眼前的枸杞', '还有开单和业绩'],
+                        txt: '生活不止眼前的枸杞\r\n还有开单和业绩'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['心在哪里', '哪里就有风景'],
+                        txt: '心在哪里\r\n哪里就有风景'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['爱在哪里', '哪里就有感动'],
+                        txt: '爱在哪里\r\n哪里就有感动'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#ff5779',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['租在哪里', '哪里就是家'],
+                        txt: '租在哪里\r\n哪里就是家'
+                    }
+                ],
+                [
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['愿你历尽千帆', '归来仍是少年'],
+                        txt: '愿你历尽千帆\r\n归来仍是少年'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 246,
+                        size: 36,
+                        txts: ['幽香佛面', '紫气兆祥', '祝生意如春浓', '财源似水来'],
+                        txt: '幽香佛面\r\n紫气兆祥\r\n祝生意如春浓\r\n财源似水来'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 222,
+                        size: 36,
+                        txts: ['祝您在新的一年', '生意兴隆', '财源广进', '客户临门', '日进斗金'],
+                        txt: '祝您在新的一年\r\n生意兴隆\r\n房源广进\r\n客户临门\r\n日进斗金'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 290,
+                        size: 36,
+                        txts: ['志在哪里', '哪里就有成功'],
+                        txt: '志在哪里\r\n哪里就有成功'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: 'gold',
+                        top: 348,
+                        left: 266,
+                        size: 36,
+                        txts: ['生活就像租房', '无论期限', '全凭选择'],
+                        txt: '生活就像租房\r\n无论期限\r\n全凭选择'
+                    }
+                ],
+                [
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 460,
+                        left: 150,
+                        size: 30,
+                        txts: ['想与你一同在十里云海翻腾', '\n\n\n\n\n旋转跳跃不停歇'],
+                        txt: '想与你一同在十里云海翻腾\r\n旋转跳跃不停歇'
+                    },
+                    {
+                        dir: 'vertical',
+                        color: '#3bbcce',
+                        top: 370,
+                        left: 250,
+                        size: 30,
+                        txts: ['好想日日都能', '梦见你', '这样我会觉得睡觉', '真是个好活动'],
+                        txt: '好想日日都能\r\n梦见你\r\n这样我会觉得睡觉\r\n真是个好活动'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 420,
+                        left: 220,
+                        size: 36,
+                        txts: ['新年好\n新年到', '棉裤一脱', '春姑娘就来了'],
+                        txt: '新年好  新年到\r\n棉裤一脱\r\n春姑娘就来了'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 366,
+                        left: 210,
+                        size: 26,
+                        txts: ['\n\n为了不让新年计划', '\n\n到最后都实现不了', '\n你应该从新年第一天', '\n\n\n\n\n就开始努力', '\n\n\n\n\n\n\n\n\n....', '努力不要制定新年计划'],
+                        txt: '为了不让新年计划\r\n到最后都实现不了\r\n你应该从新年第一天\r\n就开始努力\r\n....\r\n努力不要制定新年计划'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 410,
+                        left: 190,
+                        size: 26,
+                        txts: ['我的新年愿望是新的一年', '\n\n\n不要像现在一样穷', '\n\n\n\n后来愿望实现了', '\n\n╥﹏╥我比现在更穷了'],
+                        txt: '我的新年愿望是新的一年\r\n不要像现在一样穷\r\n后来愿望实现了\r\n我比现在更穷了'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 380,
+                        left: 220,
+                        size: 28,
+                        txts: ['新年想送你一辆车', '\n\n可惜汽车太贵', '\n\n\n\n火车太长', '\n\n\n自行车太累', '\n\n还是送你风车', '\n\n\n经济又实惠'],
+                        txt: '新年想送你一辆车\r\n可惜汽车太贵\r\n火车太长\r\n自行车太累\r\n还是送你风车\r\n经济又实惠'
+                    },
+                    {
+                        dir: 'horizontal',
+                        color: '#3bbcce',
+                        top: 460,
+                        left: 168,
+                        size: 34,
+                        txts: ['祝四海八荒的各位仙友', '早日飞升上神'],
+                        txt: '祝四海八荒的各位仙友\r\n早日飞升上神'
+                    }
+                ]
+            ]
+
+            var cardWrap = document.querySelector('section.card-wrap')
             var bgs = document.querySelectorAll('img.canvas-bg')
             var cards = document.querySelectorAll('div.card')
             var logos = document.querySelectorAll('.logo-wrap > img')
@@ -270,198 +287,10 @@
             var ctx = mycan.getContext('2d')
             var curIndex = 0
             var canShake = true
-            var rand = 0
-            var cur_card, next_card, cur_logo, next_logo, bless;
-
-            const PROPORTION = 670/966
-            const BLESS = [
-                [
-                    {
-                        dir: 'horizontal',
-                        color: '#ee3c21',
-                        top: 440,
-                        left: 168,
-                        size: 48,
-                        txts: ['新春福旺鸿运开', '佳节吉祥如意来']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#ee3c21',
-                        top: 440,
-                        left: 168,
-                        size: 48,
-                        txts: ['好运鸿福精神旺', '合家天伦喜洋洋']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#ee3c21',
-                        top: 440,
-                        left: 168,
-                        size: 48,
-                        txts: ['金色年华盛世昌', '新年新岁人双畅']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#ee3c21',
-                        top: 440,
-                        left: 168,
-                        size: 48,
-                        txts: ['百花争春竞绽放', '年年有余兆吉祥']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#ee3c21',
-                        top: 440,
-                        left: 168,
-                        size: 48,
-                        txts: ['年年难干年年干', '事事难成事难成']
-                    }
-                ],
-                [
-                    {
-                        dir: 'vertical',
-                        color: '#ff5779',
-                        top: 338,
-                        left: 290,
-                        size: 36,
-                        txts: ['灼灼桃花十里', '我的心里只有你']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: '#ff5779',
-                        top: 293,
-                        left: 290,
-                        size: 36,
-                        txts: ['生活不止眼前的枸杞', '还有开单和业绩']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: '#ff5779',
-                        top: 348,
-                        left: 290,
-                        size: 36,
-                        txts: ['心在哪里', '哪里就有风景']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: '#ff5779',
-                        top: 348,
-                        left: 290,
-                        size: 36,
-                        txts: ['爱在哪里', '哪里就有感动']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: '#ff5779',
-                        top: 348,
-                        left: 290,
-                        size: 36,
-                        txts: ['租在哪里', '哪里就是家']
-                    }
-                ],
-                [
-                    {
-                        dir: 'vertical',
-                        color: 'gold',
-                        top: 348,
-                        left: 290,
-                        size: 36,
-                        txts: ['愿你历尽千帆', '归来仍是少年']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: 'gold',
-                        top: 348,
-                        left: 246,
-                        size: 36,
-                        txts: ['幽香佛面', '紫气兆祥', '祝生意如春浓', '财源似水来']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: 'gold',
-                        top: 348,
-                        left: 222,
-                        size: 36,
-                        txts: ['祝您在新的一年', '生意兴隆', '财源广进', '客户临门', '日进斗金']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: 'gold',
-                        top: 348,
-                        left: 290,
-                        size: 36,
-                        txts: ['志在哪里', '哪里就有成功']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: 'gold',
-                        top: 348,
-                        left: 266,
-                        size: 36,
-                        txts: ['生活就像租房', '无论期限', '全凭选择']
-                    }
-                ],
-                [
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 460,
-                        left: 150,
-                        size: 30,
-                        txts: ['想与你一同在十里云海翻腾', '\n\n\n\n\n旋转跳跃不停歇']
-                    },
-                    {
-                        dir: 'vertical',
-                        color: '#3bbcce',
-                        top: 370,
-                        left: 250,
-                        size: 30,
-                        txts: ['好想日日都能', '梦见你', '这样我会觉得睡觉', '真是个好活动']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 420,
-                        left: 220,
-                        size: 36,
-                        txts: ['新年好\n新年到', '棉裤一脱', '春姑娘就来了']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 366,
-                        left: 210,
-                        size: 26,
-                        txts: ['\n\n为了不让新年计划', '\n\n到最后都实现不了', '\n你应该从新年第一天', '\n\n\n\n\n就开始努力', '\n\n\n\n\n\n\n\n\n....', '努力不要制定新年计划']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 410,
-                        left: 190,
-                        size: 26,
-                        txts: ['我的新年愿望是新的一年', '\n\n\n不要像现在一样穷', '\n\n\n\n后来愿望实现了', '\n\n╥﹏╥我比现在更穷了']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 380,
-                        left: 220,
-                        size: 28,
-                        txts: ['新年想送你一辆车', '\n\n可惜汽车太贵', '\n\n\n\n火车太长', '\n\n\n自行车太累', '\n\n还是送你风车', '\n\n\n经济又实惠']
-                    },
-                    {
-                        dir: 'horizontal',
-                        color: '#3bbcce',
-                        top: 460,
-                        left: 168,
-                        size: 34,
-                        txts: ['祝四海八荒的各位仙友', '早日飞升上神']
-                    }
-                ]
-            ]
-
-            bless = BLESS[curIndex]
+            var bless = BLESS[curIndex]
+            var rand = ~~(Math.random()*bless.length)
+            var _bless = bless[rand]
+            var cur_card, next_card, cur_logo, next_logo;
 
             function listening() {
                 cards.forEach(function(card){
@@ -479,9 +308,11 @@
                 })
                 b_shake.addEventListener('click', doShake)
                 b_preview.addEventListener('click', genPreview)
+                new ResizeSensor(cardWrap, layout)
             }
 
             function doShake() {
+                var eWord;
                 if (!canShake) return
                 canShake = false
                 cur_card = cards[curIndex]
@@ -491,8 +322,17 @@
                 next_logo = logos[curIndex]
                 bless = BLESS[curIndex]
                 rand = ~~(Math.random()*bless.length)
+                _bless = bless[rand]
+                eWord = next_card.children[0]
 
-                next_card.children[0].style.color = bless[rand].color
+                eWord.style.color = _bless.color
+                eWord.textContent = _bless.txt
+
+                if (_bless.dir === 'vertical') {
+                    eWord.style.textAlign = 'left'
+                    eWord.style.writingMode = 'vertical-lr'
+                    eWord.style.webkitWritingMode = 'vertical-lr'
+                }
 
                 cur_logo.classList.add('fadeOut')
                 next_logo.classList.add('active')
@@ -510,14 +350,12 @@
             function drawing() {
                 var _w = mycan.width
                 var _h = mycan.height
-                var w = window.innerWidth
                 var h = window.innerHeight - 140
                 var top = 0
                 var left = 0
                 var size = 40
                 var color = '#FFF'
                 var dirIsVertical = true
-                var _bless = bless[rand]
 
                 top = _bless.top
                 left = _bless.left
@@ -558,7 +396,6 @@
 
             function layout() {
                 var ww, wp, wt, it;
-                var cardWrap = document.querySelector('section.card-wrap')
                 var rect = cardWrap.getBoundingClientRect()
                 var w = rect.width
                 var h = rect.height
@@ -578,6 +415,7 @@
                     wt = PROPORTION*h*(WORDTOPS[index]/608)
                     it = PROPORTION*h*(INPUTTOPS[index]/608)
                     wp = PROPORTION*h*(WORDPADS[index]/608)
+                    if (index === 0) eWord.textContent = _bless.txt
                     eWord.style.cssText = 'width:' + ww + 'px;height:' + ww + 'px;top:' + wt + 'px;padding:' + wp + 'px;'
                     eInput.style.cssText = 'top:' + it + 'px;'
                 })
