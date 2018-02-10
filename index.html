@@ -327,7 +327,7 @@
                 b_preview.addEventListener('click', genPreview)
                 b_remake.addEventListener('click', doRemake)
                 preview.addEventListener(animationend, function(){
-                    preview.classList.remove('rotateIn')
+                    preview.classList.remove('fadeIn')
                 })
                 musicBtn.addEventListener('click', function() {
                     if (isStop) {
@@ -462,7 +462,7 @@
                 preview.setAttribute('height', h)
                 view.classList.add('active')
                 preview.classList.add('active')
-                preview.classList.add('rotateIn')
+                preview.classList.add('fadeIn')
             }
 
             function layout() {
